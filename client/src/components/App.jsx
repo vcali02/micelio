@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {Route, Router, Routes, useNavigate, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Auth from "./Auth";
 import About from "./About";
@@ -102,7 +102,7 @@ useEffect(() => {
                         
   const pillars_map = [...pillars].map(el => (
     <Grid item xs={6} >
-        <Pillars key={el.id } pillar={el} journal={el.journal} nudge={el.nudge}/>
+        <Pillars key={el.id } pillar={el}/>
     </Grid>
   ))
     
@@ -147,8 +147,6 @@ useEffect(() => {
               <Route path="/home" element={<Home/>} />
               <Route path="/about" element={<About/>} />
               <Route path="/methods/:pillar_id" element={<ActionContainer/>} />
-              <Route path="/methods/:pillar_id" element={<NudgeAction/>}/>
-              {/* <Route path="/methods/:pillar_id" element={<JournalAction/>}/> */}
               <Route path="/methods" element={<Methods/>} />
               <Route path="/methods" element={<ActionOptions />} />
               <Route path="/growth" element={<Growth/>} />

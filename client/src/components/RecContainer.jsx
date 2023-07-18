@@ -12,7 +12,7 @@ const rec = [...recs].map(el => (
 
 
   return (
-    <div >
+    <div className="page">
         {/*1. map through each recommendation*/}
       
         <Grid  container spacing={{ xs: 1, md: 2 }} >

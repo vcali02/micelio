@@ -85,9 +85,11 @@ return (
    ) : (
   <Card>
       <CardContent >
-        <Button onClick={(e) => handleClick(e)}>Back to Method</Button>
+        <Button sx={{marginLeft: "10px"}} onClick={(e) => handleClick(e)}>Back to Method</Button>
           <Typography>{ipickyou.action_prompt}</Typography>
+          <Button onClick={(e) => handleClick(e)}>Completed!</Button>
       </CardContent>
+      
   </Card>
   )}
   </div>

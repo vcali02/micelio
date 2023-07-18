@@ -68,7 +68,7 @@ function Nav({updateUser, user}) {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                <Avatar sx={{ width: 43, height: 43, bgcolor: red[300] }}>
+                <Avatar sx={{ width: 65, height: 65, bgcolor: red[300] }}>
                     <SpaIcon/>
                 </Avatar>
                 </IconButton>
@@ -102,7 +102,7 @@ function Nav({updateUser, user}) {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                <Avatar sx={{ width: 32, height: 32, bgcolor: red[300] }}>
+                <Avatar sx={{ width: 65, height: 65, bgcolor: red[300] }}>
                     <SpaIcon/>
                 </Avatar>
                 </IconButton>

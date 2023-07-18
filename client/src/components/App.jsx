@@ -19,7 +19,7 @@ import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Container from '@mui/material/Container'
-// import theme from "/Users/valeria/development/phase-5/micelio/client/src/theme.js"
+import theme from "../theme.jsx"
 
 function App() {
 

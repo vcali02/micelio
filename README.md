@@ -12,10 +12,15 @@
 
 ## Wireframe
 https://www.figma.com/file/hRXCinhvPWBrCFlWpTpQmO/micelio?type=design&node-id=0-1&mode=design&t=AYhDihunhCv6L994-0
-![Screenshot 2023-07-04 at 3 27 56 PM](https://github.com/vcali02/micelio/assets/122405969/1f25688d-f7fa-4745-8d3d-9aaef76b49cb)
-![Screenshot 2023-07-04 at 3 28 53 PM](https://github.com/vcali02/micelio/assets/122405969/ee550e44-a30d-44bd-a4c1-fda31c7adf8b)
-![Screenshot 2023-07-04 at 3 28 20 PM](https://github.com/vcali02/micelio/assets/122405969/c953bf56-09bb-4565-aacf-de9632cf7cb1)
-![Screenshot 2023-07-04 at 3 29 02 PM](https://github.com/vcali02/micelio/assets/122405969/7f5e9a86-bab5-4cd2-848d-19cbf4df4b89)
+![Screenshot 2023-07-19 at 3 19 44 PM](https://github.com/vcali02/micelio/assets/122405969/c81da462-1cb3-4969-9054-b56d2a8ed316)
+![Screenshot 2023-07-19 at 3 19 58 PM](https://github.com/vcali02/micelio/assets/122405969/783c6ca3-f3f3-4419-926f-c5511510bba7)
+![Screenshot 2023-07-19 at 3 20 11 PM](https://github.com/vcali02/micelio/assets/122405969/be7e08b5-a4e5-4fa0-bf17-8ef6cc665f09)
+![Screenshot 2023-07-19 at 3 20 24 PM](https://github.com/vcali02/micelio/assets/122405969/0a81c596-9266-4d4b-8a51-c4bf45e94ff4)
+![Screenshot 2023-07-19 at 3 20 48 PM](https://github.com/vcali02/micelio/assets/122405969/d77fb1af-5cac-43a1-8903-66edc1bd1ee1)
+![Screenshot 2023-07-19 at 3 21 16 PM](https://github.com/vcali02/micelio/assets/122405969/83d848a5-0894-4dc5-a389-8f1483204130)
+![Screenshot 2023-07-19 at 3 21 30 PM](https://github.com/vcali02/micelio/assets/122405969/efd39b75-d14d-4d86-a29a-c404dda48259)
+![Screenshot 2023-07-19 at 3 21 49 PM](https://github.com/vcali02/micelio/assets/122405969/8553872a-9b28-4d59-bfbe-1b15ed3e5e7c)
+
 
 ## Schema
 ![Screenshot 2023-07-04 at 3 29 51 PM](https://github.com/vcali02/micelio/assets/122405969/cf779568-94f3-476f-9960-d3765034664d)

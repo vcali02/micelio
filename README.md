@@ -80,13 +80,13 @@ https://www.figma.com/file/hRXCinhvPWBrCFlWpTpQmO/micelio?type=design&node-id=0-
 ## Client-side Routes
 | Client Route   | Component     |
 |----------------|---------------|
-| /home              | Home.js        |
-| /about        | About.js  |
-| /pillars      | Pillars.js  |
-| /methods | Journal.js and Nudge.js|
-| /signup    | Auth.js  |
-| //login    | Auth.js  |
-| /recommended        | Recommended.js     |
+| /home              | Home.jsx        |
+| /about        | About.jsx  |
+| /pillars      | Pillars.jsx  |
+| /methods/pillars_id | ActionContainer.jsx|
+| /signup    | Auth.jsx  |
+| //login    | Auth.jsx  |
+| /recommended        | Recommended.jsx     |
 | /growth         | CompletedPrompts.js  |
 
 

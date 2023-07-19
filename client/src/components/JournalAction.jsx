@@ -20,34 +20,47 @@ function ActionOptions({action}) {
   /*------------------STATE--------------------*/
   /*-------------------CRUD--------------------*/
   
-  useEffect((e) => {
+  useEffect(() => {
       fetch(`/api/jprompts/${action.id}`)
       .then(res => res.json())
       .then(prompt => {
           setPrompt(prompt)
       })
   },[])
+
+
+  const addAsCompleted = (journal_prompt_id, nudge_prompt_id, user_id) => {
+    fetch("/api/completed/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: user_id,
+        journal_prompt_id: journal_prompt_id,
+        nudge_prompt_id: nudge_prompt_id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Added to completed prompts", data);
+      })
+      .catch((error) => {
+        console.error("Couldn't add to completed prompts", error);
+      });
+  };
   
   /*-------------------CRUD--------------------*/
   /*------------------CONST--------------------*/
+
   let prompt_arr = Object.values(prompt)
  
-  // const getRandomPrompt = () => {
-  //     return prompt_arr[Math.floor(Math.random() * prompt_arr.length)]
-  // }
-  // console.log(getRandomPrompt())
-  // getRandomPrompt()
   const ipickyou = prompt_arr[Math.floor(Math.random() * prompt_arr.length)]
   console.log(ipickyou)
- 
-  //3. mapping through nudge prompt to access individual nudge prompts
-  // const nprompts = [...prompt_arr].map((el, i) => {
-  //     return <NPrompts key={i} nprompts={el}/>
-  // })
-  // console.log(Object.values(prompt))
 
-   /*------------------CONST--------------------*/
+  /*------------------CONST--------------------*/
   /*-------------------FUNK--------------------*/
+
   function handleClick(e){
       setSelectAction(!selectAction)
   }
@@ -59,7 +72,7 @@ function ActionOptions({action}) {
 return (
   <div>
       {selectAction ? (
-   <Card sx={{ maxWidth: 900, maxHeight: 900, margin: 5 }}>
+   <Card sx={{ minWidth: 900, maxHeight: 900, margin: 5 }}>
     <CardActionArea>
       <CardMedia
         component="img"
@@ -85,9 +98,9 @@ return (
    ) : (
   <Card>
       <CardContent >
-        <Button sx={{marginLeft: "10px"}} onClick={(e) => handleClick(e)}>Back to Method</Button>
+        <Button onClick={(e) => handleClick(e)}>Back to Method</Button>
           <Typography>{ipickyou.action_prompt}</Typography>
-          <Button onClick={(e) => handleClick(e)}>Completed!</Button>
+          {/* <Button onClick={() => addAsCompleted(action.id)}>Completed!</Button> */}
       </CardContent>
       
   </Card>

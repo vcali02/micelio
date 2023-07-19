@@ -134,7 +134,7 @@ useEffect(() => {
   return (
     
         <div >
-          {/* <ThemeProvider theme={theme} > */}
+          <ThemeProvider theme={theme} >
             <React.Fragment>
               {/* <CssBaseline /> */}
             </React.Fragment>
@@ -164,7 +164,7 @@ useEffect(() => {
             </Router>
           </Context.Provider>
         
-          {/* </ThemeProvider> */}
+          </ThemeProvider>
         </div>
     
   );

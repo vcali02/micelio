@@ -2,7 +2,7 @@ import React from 'react'
 import {Button, Paper, Grid, Typography, CssBaseline, ThemeProvider} from '@mui/material';
 import Container from '@mui/material/Container'
 // import theme from "/Users/valeria/development/phase-5/micelio/client/src/theme.js"
-import App from "../App.css"
+
 import {CardActionArea, Link, CardActions } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';

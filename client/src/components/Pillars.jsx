@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {CardActionArea, CardActions } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import {Route, Routes, Link, useParams } from "react-router-dom";
-import {Button, Box, Paper, Grid, Typography, CssBaseline, ThemeProvider} from '@mui/material';
+import {Link } from "react-router-dom";
+import {Button, Typography} from '@mui/material';
 import Container from '@mui/material/Container'
 // import theme from "/Users/valeria/development/phase-5/micelio/client/src/theme.js"
-import App from "../App.css"
 
-function Pillars({pillar, journal, nudge}) {
+
+function Pillars({pillar}) {
 
   return ( 
-   <div >
+   <Container >
         <Card sx={{maxWidth: 600, maxHeight: 300, margin: 1}}>
             <CardActionArea>
                 <CardMedia
@@ -32,13 +32,13 @@ function Pillars({pillar, journal, nudge}) {
             </CardActionArea>
             <CardActions>
             <Link to = {`/methods/${pillar.id}`}>
-                <Button sx={{marginLeft: 15}} size="small" color="primary">
+                <Button sx={{marginLeft: 50}} size="small" color="primary">
                 Explore
                 </Button>
                 </Link>
             </CardActions>
         </Card>
-    </div>
+    </Container>
           
   )
 }

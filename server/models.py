@@ -109,8 +109,7 @@ class CompletedPrompt(db.Model, SerializerMixin):
     # FOREIGN KEY
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     nudge_prompt_id = db.Column(db.Integer, db.ForeignKey("nudge_prompts.id"))
-    journal_prompt_id = db.Column(
-        db.Integer, db.ForeignKey("journal_prompts.id"))
+    journal_prompt_id = db.Column(db.Integer, db.ForeignKey("journal_prompts.id"))
 
     # RELATIONSHIP
     # -one user has many completed prompts; many prompts are completed by one user

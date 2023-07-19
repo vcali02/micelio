@@ -62,8 +62,10 @@ function ActionContainer({pillar}) {
     
   return (    
     <div className="page">
-        {n}
-        {j}
+        <Container>
+            {n}
+            {j}
+        </Container>
     </div>      
   )
 }

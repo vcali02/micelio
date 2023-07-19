@@ -60,7 +60,7 @@ function NudgeAction({action}) {
     <div>
         {selectAction ? (
     
-    <Card sx={{ maxWidth: 900, maxHeight: 900, margin: 5 }}>
+    <Card sx={{ minWidth: 900, maxHeight: 900, margin: 5 }}>
       <CardActionArea>
         <CardMedia
           component="img"

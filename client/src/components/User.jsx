@@ -1,6 +1,12 @@
 import React, {useContext, useEffect} from 'react'
 import { useParams } from "react-router-dom"
 import Context from "./Context"
+import {CardActionArea } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import {Typography} from '@mui/material';
+import Container from '@mui/material/Container'
 
 
 
@@ -22,13 +28,35 @@ console.log(user)
 
 
   return (
-    <div>
-        <h2>Welcome, </h2>
-        {/* <img src={user.image} alt={user.name}></img>
-        <p>{user.name}</p>
-        <p>{user.bio}</p> */}
+    <>
+    <Container sx={{marginLeft: "center"}}>
+    <div className="page">
+        
         {/* <p>{user.completed_prompts}</p> */}
+         <Card sx={{ maxWidth: 1000, marginTop: "250px", marginBottom: "50px" }}>
+            <CardActionArea>
+                <CardMedia
+                component="img"
+                height="500"
+                image={user.image}
+                alt={user.name}
+                />
+                <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                {user.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                {user.username}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                {user.bio}
+                </Typography>
+                </CardContent>
+            </CardActionArea>
+        </Card>
     </div>
+    </Container> 
+    </>
   )
 
 }

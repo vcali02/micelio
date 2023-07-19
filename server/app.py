@@ -22,23 +22,6 @@ from config import app, db, api, bcrypt, CORS
 app.secret_key = b'\x99\xbc@p\xfd\x83;\x1e\xda9\xd7\xb2\x82\x90\xdfy'
 
 
-# app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# app.json.compact = False
-
-# migrate = Migrate(app, db)
-
-# bcrypt = Bcrypt(app)
-
-# db.init_app(app)
-
-# api = Api(app)
-
-# # Instantiate CORS
-# #CORS(app)
-
-
 # ------------------SIGNUP--------------------#
 # @login_manager.user_loader
 # def load_user(user_id):
@@ -71,13 +54,6 @@ api.add_resource(Signup, '/signup')
 
 class Login(Resource):
     def post(self):
-        # data = request.get_json()
-        # user = User.query.filter_by(username = data.get("username")).first()
-        # password = request.get_json()["password"]
-
-        # if user.authenticate(password):
-        #     session["user_id"] = user.id
-        #     return user.to_dict(), 200
         try:
             data = request.get_json()
             user = User.query.filter_by(username=data.get('username')).first()
@@ -91,27 +67,11 @@ class Login(Resource):
             traceback.print_exc()
             return {"error": "hi", "message": str(e)}, 500
 
-        # try:
-        #     data = request.get_json()
-        #     user = User.query.filter_by(
-        #         username = data.get('username')).first()
-        #     if user.authenticate(data.get('password')):
-        #         # session['user_id'] = user.id
-        #         login_user(user, remember=True)
-        #         return make_response(user.to_dict(), 200)
-        # except:
-        #     return make_response({"401": "Unauthorized"},401)
-
 
 api.add_resource(Login, '/login')
 
 # -------------------LOGIN--------------------#
 # ------------------LOGOUT--------------------#
-# @app.route("/logout", methods=["POST"])
-# @login_required
-# def logout():
-#     logout_user()
-#     return f'You have logged out of micelio.'
 
 
 class Logout(Resource):
@@ -143,13 +103,6 @@ class AuthorizeSession(Resource):
         except Exception as e:
             traceback.print_exc()
             return {"error": "Internal Server Error.", "message": str(e)}, 500
-        # except:
-        #     return make_response({"message" : "Please log in"}, 401)
-
-        # if current_user.is_authenticated:
-        #     user = current_user.to_dict()
-        #     return user, 200
-        # return make_response({}, 401)
 
 
 api.add_resource(AuthorizeSession, '/authorize_session')
@@ -226,10 +179,8 @@ api.add_resource(OneUser, "/users/<int:id>")
 
 # --------------------USER--------------------#
 # --------------COMPLETED PROMPTS-------------#
-# ensure seed makes sense
+
 # GET /completed_prompts
-
-
 class CompletedPrompts(Resource):
     def get(self):
         cps = CompletedPrompt.query.all()
@@ -242,37 +193,6 @@ class CompletedPrompts(Resource):
         )
         return res
 
-# POST??????? maybe not
-# front end even listener will trigger a GET request to display the data
-#     def post(self):
-#         #this gives us whatever is sent to the backend
-#         #data is an object
-#         #how can we go through the data obj to get the adventurer username key
-#         #THIS IS WHAT I SEND IN THE FE POST
-#         data = CompletedPrompt.query.all()
-#         # try:
-#             #instance
-#         new_cp = CompletedPrompt(
-#             # journal_prompt= data.get("journal_prompt"),
-#             journal_prompt_id= data.get("journal_prompt_id"),
-#             # nudge_prompt = data.get("nudge_prompt"),
-#             nudge_prompt_id= data.get("nudge_prompt_id"),
-#             # user = data.get("user"),
-#             user_id = data.get("user_id")
-#         )
-#             #add/commit
-#         db.session.add(new_cp)
-#         db.session.commit()
-#             #dict
-#         new_cp_dict = new_cp.to_dict()
-#             #res
-#         res = make_response(
-#             new_cp_dict,
-#             201
-#         )
-#         return res
-#         # except:
-#         #     return {"400" : "Prompt completion unsuccessful."}, 400
 
 
 api.add_resource(CompletedPrompts, "/completed_prompts")
@@ -307,29 +227,60 @@ api.add_resource(OneCompletedPrompt, "/completed_prompts/<int:id>")
 # Completed prompts by USER ID
 
 
-@app.route("/completed_by_user/<int:id>", methods=["GET"])
-def completed_by_user(id):
-    completed = (
-        CompletedPrompt.query.join(
-            User, CompletedPrompt.user_id == User.id)
-        .filter(User.id == id)
-        .all()
-    )
-    cp_dict = [cp.to_dict() for cp in completed]
-    return make_response(cp_dict, 200)
-
-#     @app.route("/jprompts/<int:id>", methods=["GET"])
-# def jprompts(id):
-#     journal_prompts = (
-#             JournalPrompt.query.join(
-#             Journal, JournalPrompt.journals_id == Journal.id
-#         )
-#         .join(Pillar, Journal.pillar_id == Pillar.id)
-#         .filter(Pillar.id == id)
+# @app.route("/completed_by_user/<int:id>", methods=["GET"])
+# def completed_by_user(id):
+#     completed = (
+#         CompletedPrompt.query.join(
+#             User, CompletedPrompt.user_id == User.id)
+#         .filter(User.id == id)
 #         .all()
 #     )
-#     jp_dict = [j.to_dict(only=("action_prompt",)) for j in journal_prompts]
-#     return make_response(jp_dict, 200)
+#     cp_dict = [cp.to_dict() for cp in completed]
+#     return make_response(cp_dict, 200)
+
+class CompletedByUser(Resource):
+    def get(self, user_id):
+        try:
+            user = User.query.filter(User.id == user_id).first()
+            if user:
+                completed_prompts = []
+                for cp in user.completed_prompts:
+                    cp_data = cp.to_dict()
+
+                    # Since CompletedPrompt has relationships with NudgePrompt and JournalPrompt,
+                    # we can access their data directly and serialize them as well.
+                    nudge_prompt_data = cp.nudge_prompt.to_dict()
+                    journal_prompt_data = cp.journal_prompt.to_dict()
+
+                    cp_data['nudge_prompt'] = nudge_prompt_data
+                    cp_data['journal_prompt'] = journal_prompt_data
+
+                    completed_prompts.append(cp_data)
+
+                return completed_prompts, 200
+            return {'error': 'user not found'}, 404
+        except:
+            return {'error': 'user not found'}, 404
+
+
+api.add_resource(CompletedByUser, "/completed_by_user/<int:user_id>")
+
+# POST??????? maybe not
+# front end even listener will trigger a GET request to display the data
+@app.route("/completed/add", methods=["POST"])
+def add_completed():
+    data = request.get_json()
+    nudge_prompt_id = data.get("nudge_prompt_id")
+    journal_prompt_id = data.get("journal_prompt_id")
+    user_id = data.get("user_id")
+
+    user = CompletedPrompt.query.filter_by(id=user_id).first()
+
+    completed = CompletedPrompt(user_id=user.id, nudge_prompt_id=nudge_prompt_id, journal_prompt_id=journal_prompt_id)
+    db.session.add(completed)
+    db.session.commit()
+    return {"message": "added to completed prompts"}, 201
+
 
 
 # --------------COMPLETED PROMPTS-------------#
@@ -583,7 +534,7 @@ def jprompts(id):
         .filter(Pillar.id == id)
         .all()
     )
-    jp_dict = [j.to_dict(only=("action_prompt",)) for j in journal_prompts]
+    jp_dict = [j.to_dict(only=("action_prompt", "completed_at", "completed_prompt.journal_prompt_id", "completed_prompt.nudge_prompt_id", "id")) for j in journal_prompts]
     return make_response(jp_dict, 200)
 
 

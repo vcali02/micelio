@@ -35,7 +35,7 @@ function Pillars({pillar}) {
                 <Button sx={{marginLeft: 50}} size="small" color="primary">
                 Explore
                 </Button>
-                </Link>
+            </Link>
             </CardActions>
         </Card>
     </Container>

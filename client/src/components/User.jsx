@@ -29,15 +29,15 @@ console.log(user)
 
   return (
     <>
-    <Container sx={{marginLeft: "center"}}>
+    <Container >
     <div className="page">
         
         {/* <p>{user.completed_prompts}</p> */}
-         <Card sx={{ maxWidth: 1000, marginTop: "250px", marginBottom: "50px" }}>
+         <Card sx={{ minWidth: 1000, marginTop: "250px", marginBottom: "50px" }}>
             <CardActionArea>
                 <CardMedia
                 component="img"
-                height="500"
+                height="1400"
                 image={user.image}
                 alt={user.name}
                 />

@@ -22,6 +22,11 @@ function Nav({updateUser, user}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl)
 
+
+
+
+
+    
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
@@ -29,6 +34,7 @@ function Nav({updateUser, user}) {
     const handleClose = () => {
         setAnchorEl(null)
     }
+    
     const navigate = useNavigate();
     function handleLogout() {
 		fetch("/api/logout", {

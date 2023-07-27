@@ -13,7 +13,8 @@ import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlin
 function Recommended({rec}) { 
     
   return (
-    <Card sx={{ maxWidth: 600, minHeight:325, margin: 5}}>
+    <Container>
+    <Card sx={{ maxWidth: 600, minHeight:325, margin: 6}}>
     <CardActionArea>
       <CardMedia
         component="img"
@@ -34,6 +35,7 @@ function Recommended({rec}) {
         <Link color="secondary" href={rec.rec_link} variant="button"  underline="hover">Check it out!</Link>
     </CardActions>
   </Card>
+  </Container>
   )
 }
 

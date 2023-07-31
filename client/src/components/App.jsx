@@ -6,7 +6,7 @@ import About from "./About";
 import Pillars from "./Pillars";
 import ActionContainer from "./ActionContainer";
 import NudgeAction from "./NudgeAction"
-import Growth from "./Growth";
+import GrowthContainer from "./GrowthContainer";
 import RecContainer from "./RecContainer";
 import Nav from "./Nav";
 import Context from "./Context"
@@ -33,12 +33,16 @@ function App() {
 
   //5. user state
   const [user, setUser] = useState(null)
+
+  //new completed prompt
+  const [compPrompt, setCompPrompt] = useState([])
  
 /*------------------STATE--------------------*/
 /*-------------------CRUD--------------------*/
 useEffect(() => {
   getRecs()
   getPillars()
+  getCompPrompts()
 }, [user])
 
 
@@ -93,6 +97,16 @@ useEffect(() => {
   
   console.log(user);
 
+  //if there IS a user logged in, proceed
+  function getCompPrompts(){
+    if (user != null) {
+      fetch(`/api/completed_prompts/${user.id}`)
+      .then(res => res.json())
+      .then(compPrompt => setCompPrompt(compPrompt))
+    }
+    
+  }
+
 /*-------------------CRUD--------------------*/
 /*------------------CONST--------------------*/
 
@@ -146,10 +160,10 @@ useEffect(() => {
               <Route path='/users' element={<User setUser={setUser} updateUser={updateUser} user={user} />} />
               <Route path="/home" element={<Home/>} />
               <Route path="/about" element={<About/>} />
-              <Route path="/methods/:pillar_id" element={<ActionContainer/>} />
+              <Route path="/methods/:pillar_id" element={<ActionContainer user={user} compPrompt = {compPrompt}/>} />
               <Route path="/methods" element={<Methods/>} />
               <Route path="/methods" element={<ActionOptions />} />
-              <Route path="/growth" element={<Growth/>} />
+              <Route path="/growth" element={<GrowthContainer user={user} compPrompt = {compPrompt}/>} />
               {/*1. passing rec state to component*/}
               <Route path="/recommended" element={<RecContainer recs={recs}/>} />
               {/*2. passing pillar state to component*/}

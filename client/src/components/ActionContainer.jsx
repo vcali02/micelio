@@ -11,8 +11,8 @@ import Container from '@mui/material/Container'
 
 //fetch to /pillar/params.pillar_id
 //METHODS
-function ActionContainer({pillar}) {
-    const {user, setUser} = useContext(Context)
+function ActionContainer({pillar, user, compPrompt}) {
+    // const {user, setUser} = useContext(Context)
 
     /*------------------STATE--------------------*/
     
@@ -46,10 +46,10 @@ function ActionContainer({pillar}) {
 
     //3. mapping through journal and nudge (which have been deconstructed from pillars) to access nested data
     const n = [...nudges].map(el => {
-        return <NudgeAction key={el.id} action={el}/>
+        return <NudgeAction key={el.id} action={el} pillar={pillar} user= {user} compPrompt = {compPrompt}/>
     })
     const j = [...journals].map(el => {
-        return <JournalAction key={el.id} action={el}/>
+        return <JournalAction key={el.id} action={el} pillar={pillar} user= {user} compPrompt = {compPrompt}/>
     })
     
     

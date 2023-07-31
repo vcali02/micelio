@@ -181,23 +181,57 @@ api.add_resource(OneUser, "/users/<int:id>")
 # --------------COMPLETED PROMPTS-------------#
 
 # GET /completed_prompts
-class CompletedPrompts(Resource):
-    def get(self):
-        cps = CompletedPrompt.query.all()
-        if not cps:
-            return {"error": "Progress not found."}, 404
-        cps_dict = [c.to_dict() for c in cps]
-        res = make_response(
-            cps_dict,
-            200
-        )
-        return res
+# class CompletedPrompts(Resource):
+#     def get(self):
+#         cps = CompletedPrompt.query.all()
+#         if not cps:
+#             return {"error": "Progress not found."}, 404
+#         cps_dict = [c.to_dict() for c in cps]
+#         res = make_response(
+#             cps_dict,
+#             200
+#         )
+#         return res
 
 
 
-api.add_resource(CompletedPrompts, "/completed_prompts")
+# api.add_resource(CompletedPrompts, "/completed_prompts")
 
 # GET /completed_prompts/<int:id>
+class CompletedPrompts(Resource):
+    def get(self, id):
+        try:
+            cp = CompletedPrompt.query.filter(CompletedPrompt.user_id==id).all()
+            cp_dict = [c.serialize for c in cp]
+            res = make_response(
+                cp_dict,
+                200
+            )
+            return res
+        except Exception as e:
+            traceback.print_exc()
+            return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
+        
+api.add_resource(CompletedPrompts, '/completed_prompts/<int:id>')
+
+@app.route('/completed_prompt', methods=["POST"])
+def addCompletedPrompt():
+    data = request.get_json()
+    try:
+        new_cp = CompletedPrompt(
+            user_id = data.get("user_id"),
+            nudge_prompt_id = data.get("nudge_prompt_id"),
+            journal_prompt_id = data.get("journal_prompt_id"),
+        )
+        db.session.add(new_cp)
+        db.session.commit()
+
+        return make_response(new_cp.serialize, 201)
+    except Exception as e:
+            traceback.print_exc()
+            return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
+
+
 
 
 class OneCompletedPrompt(Resource):
@@ -222,7 +256,10 @@ class OneCompletedPrompt(Resource):
         return make_response({}, 204)
 
 
-api.add_resource(OneCompletedPrompt, "/completed_prompts/<int:id>")
+api.add_resource(OneCompletedPrompt, "/completed_prompt/<int:id>")
+
+
+
 
 # Completed prompts by USER ID
 
@@ -238,48 +275,48 @@ api.add_resource(OneCompletedPrompt, "/completed_prompts/<int:id>")
 #     cp_dict = [cp.to_dict() for cp in completed]
 #     return make_response(cp_dict, 200)
 
-class CompletedByUser(Resource):
-    def get(self, user_id):
-        try:
-            user = User.query.filter(User.id == user_id).first()
-            if user:
-                completed_prompts = []
-                for cp in user.completed_prompts:
-                    cp_data = cp.to_dict()
+# class CompletedByUser(Resource):
+#     def get(self, user_id):
+#         try:
+#             user = User.query.filter(User.id == user_id).first()
+#             if user:
+#                 completed_prompts = []
+#                 for cp in user.completed_prompts:
+#                     cp_data = cp.to_dict()
 
-                    # Since CompletedPrompt has relationships with NudgePrompt and JournalPrompt,
-                    # we can access their data directly and serialize them as well.
-                    nudge_prompt_data = cp.nudge_prompt.to_dict()
-                    journal_prompt_data = cp.journal_prompt.to_dict()
+#                     # Since CompletedPrompt has relationships with NudgePrompt and JournalPrompt,
+#                     # we can access their data directly and serialize them as well.
+#                     nudge_prompt_data = cp.nudge_prompt.to_dict()
+#                     journal_prompt_data = cp.journal_prompt.to_dict()
 
-                    cp_data['nudge_prompt'] = nudge_prompt_data
-                    cp_data['journal_prompt'] = journal_prompt_data
+#                     cp_data['nudge_prompt'] = nudge_prompt_data
+#                     cp_data['journal_prompt'] = journal_prompt_data
 
-                    completed_prompts.append(cp_data)
+#                     completed_prompts.append(cp_data)
 
-                return completed_prompts, 200
-            return {'error': 'user not found'}, 404
-        except:
-            return {'error': 'user not found'}, 404
+#                 return completed_prompts, 200
+#             return {'error': 'user not found'}, 404
+#         except:
+#             return {'error': 'user not found'}, 404
 
 
-api.add_resource(CompletedByUser, "/completed_by_user/<int:user_id>")
+# api.add_resource(CompletedByUser, "/completed_by_user/<int:user_id>")
 
 # POST??????? maybe not
 # front end even listener will trigger a GET request to display the data
-@app.route("/completed/add", methods=["POST"])
-def add_completed():
-    data = request.get_json()
-    nudge_prompt_id = data.get("nudge_prompt_id")
-    journal_prompt_id = data.get("journal_prompt_id")
-    user_id = data.get("user_id")
+# @app.route("/completed/add", methods=["POST"])
+# def add_completed():
+#     data = request.get_json()
+#     nudge_prompt_id = data.get("nudge_prompt_id")
+#     journal_prompt_id = data.get("journal_prompt_id")
+#     user_id = data.get("user_id")
 
-    user = CompletedPrompt.query.filter_by(id=user_id).first()
+#     user = CompletedPrompt.query.filter_by(id=user_id).first()
 
-    completed = CompletedPrompt(user_id=user.id, nudge_prompt_id=nudge_prompt_id, journal_prompt_id=journal_prompt_id)
-    db.session.add(completed)
-    db.session.commit()
-    return {"message": "added to completed prompts"}, 201
+#     completed = CompletedPrompt(user_id=user.id, nudge_prompt_id=nudge_prompt_id, journal_prompt_id=journal_prompt_id)
+#     db.session.add(completed)
+#     db.session.commit()
+#     return {"message": "added to completed prompts"}, 201
 
 
 

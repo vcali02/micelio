@@ -1,30 +1,38 @@
 import React, {useContext, useState, useEffect} from 'react'
 import Context from "./Context"
 
-function Growth() {
-  const {user, setUser} = useContext(Context)
-  const [completedByUser, setCompByUser] = useState([])
-  console.log(user)
+function Growth({prompt}) {
+  console.log(trail.id)
 
-
-  useEffect(() => {
-    if (user) {
-      fetch(`/api/completed_by_user/${user.id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setCompByUser(data);
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [user]);
-
+  function deleteCompPrompt(){
+   fetch(`api/completed_prompt/${trail.id}`, {
+     method: 'DELETE'
+   })
+ }
  
-
-  return (
-    <div className="page">
-      <p>{user.completed_prompts}</p>
-    </div>
-  )
-}
+ 
+   return (
+   
+     <Container className= "card-margin-top">
+     <Card sx={{ minWidth: 345, maxHeight: 425 }}>
+       <CardActionArea>
+       {/* <CardMedia
+           component="img"
+           height="140"
+           image={prompt.journal_prompt_id}
+           alt={prompt.journal_prompt_id}
+         /> */}
+       <CardContent>
+       
+         <Typography>{prompt.journal_prompt_id}</Typography>
+         <Typography>{prompt.journal_prompt_id}</Typography>
+         <Button>Edit</Button>
+         <Button onClick={(e) => deleteCompPrompt(e)}>Remove</Button>
+       </CardContent>
+       </CardActionArea>
+     </Card>
+     </Container>
+   )
+ }
 
 export default Growth

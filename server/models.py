@@ -121,6 +121,20 @@ class CompletedPrompt(db.Model, SerializerMixin):
     journal_prompt = db.relationship(
         "JournalPrompt", back_populates="completed_prompt")
 
+    @property
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "journal_prompt_id": self.journal_prompt_id,
+            "nudge_prompt_id": self.nudge_prompt_id
+            # "journal_prompt" : self.journal_prompt.action_prompt,
+            # "nudge_prompt" : self.nudge_prompt.action_prompt,
+            # "journal_complete" : self.journal_prompt.completed_at,
+            # "nudge_complete" : self.nudge_prompt.completed_at,
+        }
+
+
     # SERIALIZE RULES
     serialize_rules = (
         "-nudge_prompt.completed_prompt",

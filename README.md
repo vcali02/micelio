@@ -3,11 +3,10 @@
 ## As a user you can:
 - explore the four pillars of expansion
 - explore methods for expansion
-- view your growth
 - navigate home
 - explore recommended stimuli
 - learn about micelio
-- log in and out
+- create an account, log in and out
 
 
 ## Wireframe
@@ -88,5 +87,22 @@ https://www.figma.com/file/hRXCinhvPWBrCFlWpTpQmO/micelio?type=design&node-id=0-
 | //login    | Auth.jsx  |
 | /recommended        | Recommended.jsx     |
 | /growth         | CompletedPrompts.js  |
+
+
+## Instructions
+Open two terminals and input commands below:
+```
+#for backend
+$ cd server
+$ pipenv install
+$ pipenv shell
+```
+
+```
+# for frontend
+$ cd client
+$ npm install
+$ npm run dev
+```
 
 

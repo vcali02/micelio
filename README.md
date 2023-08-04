@@ -71,7 +71,7 @@ https://www.figma.com/file/hRXCinhvPWBrCFlWpTpQmO/micelio?type=design&node-id=0-
 |/logout | DELETE | {} |
 
 ## React Component Tree
-![Screenshot 2023-07-19 at 3 18 15 PM](https://github.com/vcali02/micelio/assets/122405969/18b98f14-4585-404e-9161-4420b4000945)
+<img width="786" alt="Screenshot 2023-08-04 at 5 32 18 PM" src="https://github.com/vcali02/micelio/assets/122405969/ba12f144-69c8-4361-bf43-029f1c306deb">
 
 
 

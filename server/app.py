@@ -2,9 +2,9 @@
 
 
 # Remote library imports
+from flask_migrate import Migrate
 import traceback
 from flask import make_response, request, session
-from flask_migrate import Migrate
 from flask_restful import Resource
 from models import User, CompletedPrompt, NudgePrompt, Nudge, JournalPrompt, Journal, Pillar, Recommendation
 # Local imports
